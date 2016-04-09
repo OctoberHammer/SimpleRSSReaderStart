@@ -1,4 +1,4 @@
-# SimpleRSSReaderStart
+# Mobile app for ESLPod.com, based on SimpleRSSReaderStart-Project from AppCoda
 
 
 ToDo LIST for this Particular Project
