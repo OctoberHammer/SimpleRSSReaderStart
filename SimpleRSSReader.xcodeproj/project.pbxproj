@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C36012C91CAAAAC400FEE4CB /* FeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36012C81CAAAAC400FEE4CB /* FeedParser.swift */; };
+		C383BB8D1CB95A04008A1D9D /* SinglePodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C383BB8C1CB95A04008A1D9D /* SinglePodViewController.swift */; };
+		C383BB911CB95C75008A1D9D /* ToDo.txt in Resources */ = {isa = PBXBuildFile; fileRef = C383BB901CB95C75008A1D9D /* ToDo.txt */; };
+		C3DED66B1CB6F7D900911D8E /* English as a Second Language (ESL) Podcast - Learn English Online - powered by FeedBurner.xml in Resources */ = {isa = PBXBuildFile; fileRef = C3DED66A1CB6F7D900911D8E /* English as a Second Language (ESL) Podcast - Learn English Online - powered by FeedBurner.xml */; };
 		F46F13CF1A8E0A6E00EEB477 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46F13CE1A8E0A6E00EEB477 /* AppDelegate.swift */; };
 		F46F13D41A8E0A6E00EEB477 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F46F13D21A8E0A6E00EEB477 /* Main.storyboard */; };
 		F46F13D61A8E0A6E00EEB477 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F46F13D51A8E0A6E00EEB477 /* Images.xcassets */; };
@@ -29,6 +32,9 @@
 
 /* Begin PBXFileReference section */
 		C36012C81CAAAAC400FEE4CB /* FeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedParser.swift; path = ../FeedParser.swift; sourceTree = "<group>"; };
+		C383BB8C1CB95A04008A1D9D /* SinglePodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePodViewController.swift; sourceTree = "<group>"; };
+		C383BB901CB95C75008A1D9D /* ToDo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ToDo.txt; sourceTree = "<group>"; };
+		C3DED66A1CB6F7D900911D8E /* English as a Second Language (ESL) Podcast - Learn English Online - powered by FeedBurner.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "English as a Second Language (ESL) Podcast - Learn English Online - powered by FeedBurner.xml"; sourceTree = "<group>"; };
 		F46F13C91A8E0A6E00EEB477 /* SimpleRSSReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleRSSReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F46F13CD1A8E0A6E00EEB477 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F46F13CE1A8E0A6E00EEB477 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +69,7 @@
 		F46F13C01A8E0A6E00EEB477 = {
 			isa = PBXGroup;
 			children = (
+				C383BB901CB95C75008A1D9D /* ToDo.txt */,
 				F46F13CB1A8E0A6E00EEB477 /* SimpleRSSReader */,
 				F46F13E11A8E0A6F00EEB477 /* SimpleRSSReaderTests */,
 				F46F13CA1A8E0A6E00EEB477 /* Products */,
@@ -89,6 +96,7 @@
 				F46F13CC1A8E0A6E00EEB477 /* Supporting Files */,
 				F46F13EE1A8E11A900EEB477 /* NewsTableViewController.swift */,
 				F46F13F01A8E11BA00EEB477 /* NewsTableViewCell.swift */,
+				C383BB8C1CB95A04008A1D9D /* SinglePodViewController.swift */,
 			);
 			path = SimpleRSSReader;
 			sourceTree = "<group>";
@@ -97,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				F46F13CD1A8E0A6E00EEB477 /* Info.plist */,
+				C3DED66A1CB6F7D900911D8E /* English as a Second Language (ESL) Podcast - Learn English Online - powered by FeedBurner.xml */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -199,6 +208,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C383BB911CB95C75008A1D9D /* ToDo.txt in Resources */,
+				C3DED66B1CB6F7D900911D8E /* English as a Second Language (ESL) Podcast - Learn English Online - powered by FeedBurner.xml in Resources */,
 				F46F13D41A8E0A6E00EEB477 /* Main.storyboard in Resources */,
 				F46F13D91A8E0A6E00EEB477 /* LaunchScreen.xib in Resources */,
 				F46F13D61A8E0A6E00EEB477 /* Images.xcassets in Resources */,
@@ -222,6 +233,7 @@
 				C36012C91CAAAAC400FEE4CB /* FeedParser.swift in Sources */,
 				F46F13EF1A8E11A900EEB477 /* NewsTableViewController.swift in Sources */,
 				F46F13CF1A8E0A6E00EEB477 /* AppDelegate.swift in Sources */,
+				C383BB8D1CB95A04008A1D9D /* SinglePodViewController.swift in Sources */,
 				F46F13F11A8E11BA00EEB477 /* NewsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,7 +360,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SimpleRSSReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appcoda.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.octoberhammer.ESLPod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -359,7 +371,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SimpleRSSReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appcoda.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.octoberhammer.ESLPod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
