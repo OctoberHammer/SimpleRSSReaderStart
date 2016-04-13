@@ -12,9 +12,19 @@ class NewsTableViewController: UITableViewController {
 	
 	private var rssItems: [(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String)]?
 	
+	let appDelegate : AppDelegate = AppDelegate().sharedInstance()
+	var rssItems1: [Episode]?
+	
+	
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+		
+		if Reachability.isConnectedToNetwork() == true {
+			print("Internet connection OK")
+		} else {
+			print("Internet connection FAILED")
+		}
+		
         tableView.estimatedRowHeight = 155.0
         tableView.rowHeight = UITableViewAutomaticDimension
 		
@@ -24,6 +34,7 @@ class NewsTableViewController: UITableViewController {
 				(rssItems: [(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String)]) -> Void
 			in
 				self.rssItems = rssItems
+				self.rssItems1 =  self.appDelegate.rssItems
 				NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
 					self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .None)
 			})
@@ -47,15 +58,15 @@ class NewsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-		guard let rssItems = rssItems else {
+		guard let rssItems1 = rssItems1 else {
 			return 0
 		}
-		return rssItems.count
+		return rssItems1.count
     }
 
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsTableViewCell
-		if let item = rssItems?[indexPath.row] {
+		if let item = rssItems1?[indexPath.row] {
 			cell.titleLabel.text = item.title
 			cell.descriptionLabel.text = item.itunesSubtitle
 			cell.dateLabel.text = item.pubDate
@@ -70,7 +81,9 @@ class NewsTableViewController: UITableViewController {
 			let sendingCell = sender as! NewsTableViewCell;
 			//print("\(sendingCell.tag)")
 			let index = sendingCell.tag;
-			let currentEpisode = rssItems?[index]
+			var currentEpisode = rssItems1?[index]
+			var oneEpisodeViewController = segue.destinationViewController as! OneEpisodeViewController
+			oneEpisodeViewController.currentEpisode = currentEpisode
 		}
 	}
 }

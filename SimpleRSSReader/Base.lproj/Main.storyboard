@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Ryl-3I-pp9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CUc-9v-3Gf">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -19,7 +19,7 @@
                                 <rect key="frame" x="0.0" y="86" width="600" height="155"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Er9-XA-d08" id="f0h-YI-uH6">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="154.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="155"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtE-Zo-w5F">
@@ -35,7 +35,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xut-k7-jZt">
-                                            <rect key="frame" x="18" y="39" width="564" height="21.5"/>
+                                            <rect key="frame" x="18" y="39" width="564" height="22"/>
                                             <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -58,7 +58,7 @@
                                     <outlet property="dateLabel" destination="xut-k7-jZt" id="QDj-ac-5ng"/>
                                     <outlet property="descriptionLabel" destination="Z07-4k-I5q" id="n9o-u1-hmE"/>
                                     <outlet property="titleLabel" destination="KtE-Zo-w5F" id="eSz-O7-vDj"/>
-                                    <segue destination="pi5-Hj-dAy" kind="showDetail" identifier="showSpecificEpisode" id="Izg-Xx-5oi"/>
+                                    <segue destination="gyr-P1-XRv" kind="show" identifier="showSpecificEpisode" id="dqe-fO-hdv"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -71,57 +71,135 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sek-C6-193" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="976" y="147"/>
+            <point key="canvasLocation" x="1788" y="147"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="bsc-UC-yVS">
+        <!--One Episode View Controller-->
+        <scene sceneID="En1-A0-Llb">
             <objects>
-                <viewController id="pi5-Hj-dAy" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="cjY-qL-1Dm"/>
-                        <viewControllerLayoutGuide type="bottom" id="qb9-Dn-oMb"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ovl-MV-QEE">
+                <tableViewController id="gyr-P1-XRv" customClass="OneEpisodeViewController" customModule="SimpleRSSReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="IrM-WD-OKB">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFC-Yb-bQd">
-                                <rect key="frame" x="20" y="33" width="564" height="28"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="leadingMargin" secondItem="AFC-Yb-bQd" secondAttribute="leading" id="EeP-Gn-N4B"/>
-                            <constraint firstItem="AFC-Yb-bQd" firstAttribute="top" secondItem="cjY-qL-1Dm" secondAttribute="bottom" constant="13" id="nDV-7a-ZHe"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="AFC-Yb-bQd" secondAttribute="trailing" constant="-4" id="uBB-Xy-34Z"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Q7N-oq-q8s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <sections>
+                            <tableViewSection id="I7s-LK-AQy">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="controllCell" selectionStyle="default" indentationWidth="10" rowHeight="184" id="hIM-Jb-R2T" customClass="ControllCell" customModule="SimpleRSSReader" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="64" width="600" height="184"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hIM-Jb-R2T" id="Xw9-2r-Stt">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="184"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="icon_1" translatesAutoresizingMaskIntoConstraints="NO" id="TWW-qb-HOx">
+                                                    <rect key="frame" x="8" y="4" width="249" height="95"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Название эпизода" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZpD-71-wb4">
+                                                    <rect key="frame" x="265" y="4" width="327" height="95"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Контроллер аудиоплеера: Кнопкие Плей/Пауза/Перемотки,Замедления" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="whQ-yZ-rXf">
+                                                    <rect key="frame" x="8" y="107" width="584" height="69"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="TWW-qb-HOx" firstAttribute="top" secondItem="Xw9-2r-Stt" secondAttribute="topMargin" constant="-4" id="0VP-8U-MsR"/>
+                                                <constraint firstItem="whQ-yZ-rXf" firstAttribute="top" secondItem="TWW-qb-HOx" secondAttribute="bottom" constant="8" id="5a1-Wi-LJp"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="whQ-yZ-rXf" secondAttribute="leading" id="IyM-Tz-iFi"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ZpD-71-wb4" secondAttribute="trailing" constant="-6" id="Juu-qU-i0c"/>
+                                                <constraint firstItem="ZpD-71-wb4" firstAttribute="leading" secondItem="TWW-qb-HOx" secondAttribute="trailing" constant="8" id="RJY-7z-LZI"/>
+                                                <constraint firstItem="ZpD-71-wb4" firstAttribute="top" secondItem="Xw9-2r-Stt" secondAttribute="topMargin" constant="-4" id="gnO-Pn-Pf5"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="TWW-qb-HOx" secondAttribute="leading" id="n43-2K-djk"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="whQ-yZ-rXf" secondAttribute="trailing" id="p2g-Cj-3oB"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="whQ-yZ-rXf" secondAttribute="bottom" id="tGj-uq-vhB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="308" id="W2X-Jf-Rl9" customClass="EpisodeContentCell" customModule="SimpleRSSReader" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="248" width="600" height="308"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W2X-Jf-Rl9" id="ETV-Xs-ntN">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="308"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <webView contentMode="scaleAspectFit" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RAo-NQ-3QX">
+                                                    <rect key="frame" x="16" y="8" width="571" height="292"/>
+                                                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="292" id="ebh-o8-z95"/>
+                                                    </constraints>
+                                                </webView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="RAo-NQ-3QX" secondAttribute="trailing" constant="5" id="CQP-10-H0G"/>
+                                                <constraint firstItem="RAo-NQ-3QX" firstAttribute="leading" secondItem="ETV-Xs-ntN" secondAttribute="leadingMargin" constant="8" id="Du8-dN-Pzu"/>
+                                                <constraint firstAttribute="topMargin" secondItem="RAo-NQ-3QX" secondAttribute="top" id="pYx-Ug-8sP"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1iy-jM-6cb" customClass="LicenceCell" customModule="SimpleRSSReader" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1iy-jM-6cb" id="Geu-Eb-3Cd">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Лицензии" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Boj-8G-edp">
+                                                    <rect key="frame" x="18" y="8" width="416" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="gyr-P1-XRv" id="1oW-Fy-aLU"/>
+                            <outlet property="delegate" destination="gyr-P1-XRv" id="3Pt-HL-6FY"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="controllCell" destination="hIM-Jb-R2T" id="slp-a9-R9l"/>
+                        <outlet property="episodeContent" destination="RAo-NQ-3QX" id="jjC-v7-aHL"/>
+                        <outlet property="episodeContentCell" destination="W2X-Jf-Rl9" id="OOp-Ee-Sv6"/>
+                        <outlet property="episodeTitle" destination="ZpD-71-wb4" id="36B-sn-J8k"/>
+                        <outlet property="licelnseLabel" destination="Boj-8G-edp" id="lSl-89-6FN"/>
+                        <outlet property="licenceCell" destination="1iy-jM-6cb" id="VjG-5h-hoe"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PQ8-ZS-DZX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1722" y="142"/>
+            <point key="canvasLocation" x="2490" y="141"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="gyy-eK-CLD">
+        <!--ESLPod.com-->
+        <scene sceneID="PBv-Rb-xNw">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ryl-3I-pp9" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CUc-9v-3Gf" customClass="MainController" customModule="SimpleRSSReader" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Chy-KT-1vU">
+                    <navigationItem key="navigationItem" title="ESLPod.com" id="F5n-bK-Ejy"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vE7-sb-E9n">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="6gR-P7-a3g" kind="relationship" relationship="rootViewController" id="SLI-7U-MYh"/>
+                        <segue destination="6gR-P7-a3g" kind="relationship" relationship="rootViewController" id="VOB-Ue-vRW"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Vy-di-Pxn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NEA-X9-qgH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="164" y="147"/>
+            <point key="canvasLocation" x="976" y="147"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_1" width="150" height="86"/>
+    </resources>
 </document>

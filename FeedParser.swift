@@ -10,6 +10,12 @@ import UIKit
 
 class FeedParser: NSObject, NSXMLParserDelegate {
 	private var rssItems:[(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String)] = []
+
+	
+	let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
+
+	
 	private var currentElement: String = ""
 	private var currentTitle: String = "" {
 		didSet {
@@ -82,17 +88,13 @@ class FeedParser: NSObject, NSXMLParserDelegate {
 		})
 		
 		task.resume()
-		
-		
-		
-		
-		
-		
+
 	}
 	
 	
 	func parserDidStartDocument(parser: NSXMLParser) {
 		rssItems = []
+		appDelegate.rssItems = []
 	}
 	
 	
@@ -130,7 +132,10 @@ class FeedParser: NSObject, NSXMLParserDelegate {
 	func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
 		if elementName == "item" {
 			let rssItem = (title: currentTitle, link: currentLink, description: currentDescription, pubDate: currentPubDate, guid: currentGuid, duration: currentDuration, itunesAuthor: currentItunesAuthor, itunesSubtitle: currentItunesSubtitle)
+			let rssItem1 = Episode(title: currentTitle, link: currentLink, description: currentDescription, pubDate: currentPubDate, guid: currentGuid, duration: currentDuration, itunesAuthor: currentItunesAuthor, itunesSubtitle: currentItunesSubtitle)
 			rssItems += [rssItem]
+			appDelegate.rssItems += [rssItem1]
+			
 		}
 	}
 	
