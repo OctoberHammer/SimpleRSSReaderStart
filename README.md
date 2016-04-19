@@ -1,4 +1,5 @@
-# Mobile app for ESLPod.com, based on SimpleRSSReaderStart-Project from AppCoda
+## Mobile app for Learning English through listening
+### via ESLPod.com, based on SimpleRSSReaderStart-Project from AppCoda
 
 
 ToDo LIST for this Particular Project
