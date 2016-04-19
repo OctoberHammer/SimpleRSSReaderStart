@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="expandedEpisodeCell" rowHeight="644" id="KGk-i7-Jjw" customClass="ExpandedEpisodeCell" customModule="SimpleRSSReader" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="644"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="600" height="643.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" misplaced="YES" text="Date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yn8-fO-mhR">
+                        <rect key="frame" x="8" y="41" width="584" height="22"/>
+                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQ8-t0-tIu">
+                        <rect key="frame" x="8" y="10" width="584" height="28"/>
+                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="254" misplaced="YES" text="Description" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lm-MN-foV">
+                        <rect key="frame" x="8" y="65" width="584" height="84"/>
+                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYL-Xo-LgC">
+                        <rect key="frame" x="8" y="157" width="584" height="412"/>
+                        <attributedString key="attributedText">
+                            <fragment content="FullContent">
+                                <attributes>
+                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <font key="NSFont" size="18" name="HelveticaNeue-Bold"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="eYL-Xo-LgC" firstAttribute="top" secondItem="3lm-MN-foV" secondAttribute="bottom" constant="8" id="6xQ-FO-Yqm"/>
+                    <constraint firstItem="3lm-MN-foV" firstAttribute="top" secondItem="Yn8-fO-mhR" secondAttribute="bottom" constant="3" id="Fv8-56-d4d"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="eYL-Xo-LgC" secondAttribute="leading" id="LJV-Lz-pey"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="3lm-MN-foV" secondAttribute="leading" id="NoO-Be-5C0"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="LQ8-t0-tIu" secondAttribute="leading" id="XPC-M7-fFO"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Yn8-fO-mhR" secondAttribute="trailing" id="bg7-Qj-fh8"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="eYL-Xo-LgC" secondAttribute="trailing" id="c7M-yX-9X2"/>
+                    <constraint firstItem="Yn8-fO-mhR" firstAttribute="top" secondItem="LQ8-t0-tIu" secondAttribute="bottom" constant="2" id="g0r-Zn-Ijd"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="LQ8-t0-tIu" secondAttribute="trailing" id="lMf-vf-zft"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="3lm-MN-foV" secondAttribute="trailing" id="mTU-au-F1d"/>
+                    <constraint firstItem="LQ8-t0-tIu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="nHg-ZR-7Ny"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="Yn8-fO-mhR" secondAttribute="leading" id="oRZ-R4-6wt"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="eYL-Xo-LgC" secondAttribute="bottom" constant="66.5" id="tpb-c9-J2j"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dateLabel" destination="Yn8-fO-mhR" id="9gL-kc-uFa"/>
+                <outlet property="descriptionLabel" destination="3lm-MN-foV" id="EP0-K4-MLo"/>
+                <outlet property="fullContentLabel" destination="eYL-Xo-LgC" id="nrG-DP-xMq"/>
+                <outlet property="titleLabel" destination="LQ8-t0-tIu" id="Aek-HY-tOa"/>
+            </connections>
+            <point key="canvasLocation" x="490" y="499"/>
+        </tableViewCell>
+    </objects>
+</document>

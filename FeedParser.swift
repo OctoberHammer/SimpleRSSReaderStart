@@ -9,11 +9,11 @@
 import UIKit
 
 class FeedParser: NSObject, NSXMLParserDelegate {
-	private var rssItems:[(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String)] = []
+	private var rssItems:[(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String, origLink: String)] = []
 
 	
 	let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-
+	let singletonModel = SingletonModel.sharedInstance
 
 	
 	private var currentElement: String = ""
@@ -53,6 +53,12 @@ class FeedParser: NSObject, NSXMLParserDelegate {
 		}
 	}
 	
+	private var currentOrigLink:String = "" {
+		didSet {
+			currentOrigLink = currentOrigLink.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+		}
+	}
+	
 	private var currentGuid:String = "" {
 		didSet {
 			currentGuid = currentGuid.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
@@ -65,9 +71,9 @@ class FeedParser: NSObject, NSXMLParserDelegate {
 		}
 	}
 	
-	private var parserCompletionHandler: ([(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String)] -> Void)?
+	private var parserCompletionHandler: ([(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String, origLink: String)] -> Void)?
 	
-	func parseFeed(feedUrl: String, completionHandler: ([(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String)] -> Void)?) -> Void {
+	func parseFeed(feedUrl: String, completionHandler: ([(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String, origLink: String)] -> Void)?) -> Void {
 		self.parserCompletionHandler = completionHandler
 		
 		let request = NSURLRequest(URL: NSURL(string:feedUrl)!)
@@ -111,6 +117,7 @@ class FeedParser: NSObject, NSXMLParserDelegate {
 			currentDescription = ""
 			currentItunesAuthor = ""
 			currentItunesSubtitle = ""
+			currentOrigLink = ""
 		}
 	}
 	
@@ -125,16 +132,17 @@ class FeedParser: NSObject, NSXMLParserDelegate {
 		case "guid": currentGuid += string
 		case "itunes:author": currentItunesAuthor += string
 		case "itunes:subtitle": currentItunesSubtitle += string
+		case "feedburner:origLink": currentOrigLink += string
 		default: break
 		}
 	}
 	
 	func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
 		if elementName == "item" {
-			let rssItem = (title: currentTitle, link: currentLink, description: currentDescription, pubDate: currentPubDate, guid: currentGuid, duration: currentDuration, itunesAuthor: currentItunesAuthor, itunesSubtitle: currentItunesSubtitle)
-			let rssItem1 = Episode(title: currentTitle, link: currentLink, description: currentDescription, pubDate: currentPubDate, guid: currentGuid, duration: currentDuration, itunesAuthor: currentItunesAuthor, itunesSubtitle: currentItunesSubtitle)
-			rssItems += [rssItem]
-			appDelegate.rssItems += [rssItem1]
+//			let rssItem = (title: currentTitle, link: currentLink, description: currentDescription, pubDate: currentPubDate, guid: currentGuid, duration: currentDuration, itunesAuthor: currentItunesAuthor, itunesSubtitle: currentItunesSubtitle, origLink: currentOrigLink)
+			let rssItem = Episode(title: currentTitle, link: currentLink, description: currentDescription, pubDate: currentPubDate, guid: currentGuid, duration: currentDuration, itunesAuthor: currentItunesAuthor, itunesSubtitle: currentItunesSubtitle, origLink: currentOrigLink)
+//			rssItems += [rssItem]
+			singletonModel.arrayOfEpisodes += [rssItem]
 			
 		}
 	}

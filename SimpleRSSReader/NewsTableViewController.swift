@@ -10,14 +10,15 @@ import UIKit
 
 class NewsTableViewController: UITableViewController {
 	
-	private var rssItems: [(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String)]?
+	private var rssItems: [(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String, origLink: String)]?
 	
 	let appDelegate : AppDelegate = AppDelegate().sharedInstance()
 	var rssItems1: [Episode]?
-	
+	let singletonModel = SingletonModel.sharedInstance
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		tableView.registerNib(UINib(nibName: "ExpandedEpisodeCell", bundle: nil), forCellReuseIdentifier: "expandedEpisodeCell")
 		
 		if Reachability.isConnectedToNetwork() == true {
 			print("Internet connection OK")
@@ -25,13 +26,16 @@ class NewsTableViewController: UITableViewController {
 			print("Internet connection FAILED")
 		}
 		
+		let singletonModel = SingletonModel.sharedInstance
+
+		
         tableView.estimatedRowHeight = 155.0
         tableView.rowHeight = UITableViewAutomaticDimension
 		
 		let feedParser = FeedParser()
 		feedParser.parseFeed("https://feeds.feedburner.com/EnglishAsASecondLanguagePodcast",
 			completionHandler: {
-				(rssItems: [(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String)]) -> Void
+				(rssItems: [(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String, origLink: String)]) -> Void
 			in
 				self.rssItems = rssItems
 				self.rssItems1 =  self.appDelegate.rssItems
@@ -58,21 +62,55 @@ class NewsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-		guard let rssItems1 = rssItems1 else {
-			return 0
-		}
-		return rssItems1.count
+//		guard let rssItems1 = singletonModel.arrayOfEpisodes else {
+//			return 0
+//		}
+		return singletonModel.arrayOfEpisodes.count //rssItems1.count
     }
 
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsTableViewCell
-		if let item = rssItems1?[indexPath.row] {
-			cell.titleLabel.text = item.title
-			cell.descriptionLabel.text = item.itunesSubtitle
-			cell.dateLabel.text = item.pubDate
-			cell.tag = indexPath.row
+		let item = singletonModel.arrayOfEpisodes[indexPath.row]
+			if !item.isSelected {
+				let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsTableViewCell
+				cell.titleLabel.text = item.title
+				cell.descriptionLabel.text = item.itunesSubtitle
+				cell.dateLabel.text = item.pubDate
+				cell.tag = indexPath.row
+				return cell
+			} else {
+				let cell = tableView.dequeueReusableCellWithIdentifier("expandedEpisodeCell", forIndexPath: indexPath) as! ExpandedEpisodeCell
+				cell.titleLabel.text = item.title
+				cell.descriptionLabel.text = item.itunesSubtitle
+				cell.dateLabel.text = item.pubDate
+				cell.tag = indexPath.row
+				cell.fullContentLabel.attributedText = item.reachtextContent
+				return cell
+			}
+
+//		return cell
+	}
+	
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+		let item = singletonModel.arrayOfEpisodes[indexPath.row]
+		
+		
+		item.isSelected = !item.isSelected
+		item.reachtextContent = item.description?.html2AttributedString
+		if item.isSelected{
+			tableView.reloadRowsAtIndexPaths(
+				[indexPath],
+				withRowAnimation:UITableViewRowAnimation.Left)
+		} else {
+			tableView.reloadRowsAtIndexPaths(
+				[indexPath],
+				withRowAnimation:UITableViewRowAnimation.Right)
 		}
-		return cell
+		tableView.deselectRowAtIndexPath(indexPath, animated:false)
+		return
+		
+
 	}
 	
 	
