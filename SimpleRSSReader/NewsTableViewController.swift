@@ -10,7 +10,7 @@ import UIKit
 
 class NewsTableViewController: UITableViewController {
 	
-	private var rssItems: [(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String, origLink: String)]?
+	fileprivate var rssItems: [(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String, origLink: String)]?
 	
 	let appDelegate : AppDelegate = AppDelegate().sharedInstance()
 	var rssItems1: [Episode]?
@@ -18,7 +18,7 @@ class NewsTableViewController: UITableViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		tableView.registerNib(UINib(nibName: "ExpandedEpisodeCell", bundle: nil), forCellReuseIdentifier: "expandedEpisodeCell")
+		tableView.register(UINib(nibName: "ExpandedEpisodeCell", bundle: nil), forCellReuseIdentifier: "expandedEpisodeCell")
 		
 		if Reachability.isConnectedToNetwork() == true {
 			print("Internet connection OK")
@@ -39,8 +39,8 @@ class NewsTableViewController: UITableViewController {
 			in
 				self.rssItems = rssItems
 				self.rssItems1 =  self.appDelegate.rssItems
-				NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-					self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .None)
+				OperationQueue.main.addOperation({ () -> Void in
+					self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
 			})
     })
 		
@@ -55,12 +55,12 @@ class NewsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
 //		guard let rssItems1 = singletonModel.arrayOfEpisodes else {
 //			return 0
@@ -68,18 +68,18 @@ class NewsTableViewController: UITableViewController {
 		return singletonModel.arrayOfEpisodes.count //rssItems1.count
     }
 
-	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsTableViewCell
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NewsTableViewCell
 		let item = singletonModel.arrayOfEpisodes[indexPath.row]
 			if !item.isSelected {
-				let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NewsTableViewCell
+				let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NewsTableViewCell
 				cell.titleLabel.text = item.title
 				cell.descriptionLabel.text = item.itunesSubtitle
 				cell.dateLabel.text = item.pubDate
 				cell.tag = indexPath.row
 				return cell
 			} else {
-				let cell = tableView.dequeueReusableCellWithIdentifier("expandedEpisodeCell", forIndexPath: indexPath) as! ExpandedEpisodeCell
+				let cell = tableView.dequeueReusableCell(withIdentifier: "expandedEpisodeCell", for: indexPath) as! ExpandedEpisodeCell
 				cell.titleLabel.text = item.title
 				cell.descriptionLabel.text = item.itunesSubtitle
 				cell.dateLabel.text = item.pubDate
@@ -91,7 +91,7 @@ class NewsTableViewController: UITableViewController {
 //		return cell
 	}
 	
-	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
 		let item = singletonModel.arrayOfEpisodes[indexPath.row]
 		
@@ -99,28 +99,28 @@ class NewsTableViewController: UITableViewController {
 		item.isSelected = !item.isSelected
 		item.reachtextContent = item.description?.html2AttributedString
 		if item.isSelected{
-			tableView.reloadRowsAtIndexPaths(
-				[indexPath],
-				withRowAnimation:UITableViewRowAnimation.Left)
+			tableView.reloadRows(
+				at: [indexPath],
+				with:UITableViewRowAnimation.left)
 		} else {
-			tableView.reloadRowsAtIndexPaths(
-				[indexPath],
-				withRowAnimation:UITableViewRowAnimation.Right)
+			tableView.reloadRows(
+				at: [indexPath],
+				with:UITableViewRowAnimation.right)
 		}
-		tableView.deselectRowAtIndexPath(indexPath, animated:false)
+		tableView.deselectRow(at: indexPath, animated:false)
 		return
 		
 
 	}
 	
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showSpecificEpisode" {
 			let sendingCell = sender as! NewsTableViewCell;
 			//print("\(sendingCell.tag)")
 			let index = sendingCell.tag;
-			var currentEpisode = rssItems1?[index]
-			var oneEpisodeViewController = segue.destinationViewController as! OneEpisodeViewController
+			let currentEpisode = rssItems1?[index]
+			let oneEpisodeViewController = segue.destination as! OneEpisodeViewController
 			oneEpisodeViewController.currentEpisode = currentEpisode
 		}
 	}

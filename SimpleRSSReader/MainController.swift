@@ -9,11 +9,11 @@
 import UIKit
 
 extension CAGradientLayer {
-	class func gradientLayerForBounds(bounds: CGRect, upperColor: UIColor, lowerColor: UIColor) -> CAGradientLayer {
+	class func gradientLayerForBounds(_ bounds: CGRect, upperColor: UIColor, lowerColor: UIColor) -> CAGradientLayer {
 		let layer = CAGradientLayer()
 		layer.frame = bounds
 		//layer.colors = [UIColor.orangeColor().CGColor, UIColor.yellowColor().CGColor]
-		layer.colors = [upperColor.CGColor, lowerColor.CGColor];
+		layer.colors = [upperColor.cgColor, lowerColor.cgColor];
 		layer.endPoint = CGPoint(x:0, y:0)
 		layer.startPoint = CGPoint(x:1, y:0)
 		return layer
@@ -27,18 +27,18 @@ class MainController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationBar.translucent = false
-        self.navigationBar.tintColor = UIColor.whiteColor()
-        let fontDictionary = [ NSForegroundColorAttributeName:UIColor.whiteColor() ]
+        self.navigationBar.isTranslucent = false
+        self.navigationBar.tintColor = UIColor.white
+        let fontDictionary = [ NSForegroundColorAttributeName:UIColor.white ]
         self.navigationBar.titleTextAttributes = fontDictionary
-        self.navigationBar.setBackgroundImage(imageLayerForGradientBackground(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationBar.setBackgroundImage(imageLayerForGradientBackground(), for: UIBarMetrics.default)
         
         /*if self.revealViewController() != nil {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }*/
     }
     
-	private func imageLayerForGradientBackground() -> UIImage {
+	fileprivate func imageLayerForGradientBackground() -> UIImage {
 		
 		var updatedFrame = self.navigationBar.bounds
 		// take into account the status bar
@@ -49,9 +49,9 @@ class MainController: UINavigationController {
 		let lowerColor = UIColor(red: 0x93/255.0, green: 0xBE/255.0, blue: 0x2A/255.0, alpha: 1.0);
 		let layer = CAGradientLayer.gradientLayerForBounds(updatedFrame, upperColor: upperColor, lowerColor: lowerColor)
 		UIGraphicsBeginImageContext(layer.bounds.size)
-		layer.renderInContext(UIGraphicsGetCurrentContext()!)
+		layer.render(in: UIGraphicsGetCurrentContext()!)
 		let image = UIGraphicsGetImageFromCurrentImageContext()
 		UIGraphicsEndImageContext()
-		return image
+		return image!
 	}
 }

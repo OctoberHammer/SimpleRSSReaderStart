@@ -10,7 +10,6 @@
 		C327FBC21CC3CC1500260FFA /* ExpandedEpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C327FBC01CC3CC1500260FFA /* ExpandedEpisodeCell.swift */; };
 		C327FBC31CC3CC1500260FFA /* ExpandedEpisodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C327FBC11CC3CC1500260FFA /* ExpandedEpisodeCell.xib */; };
 		C327FBC51CC4C08200260FFA /* SingletonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C327FBC41CC4C08200260FFA /* SingletonModel.swift */; };
-		C32DEDB21CC0381400CC7863 /* FoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32DEDB11CC0381400CC7863 /* FoldingCell.swift */; };
 		C32EE5801CBE297400FDAB79 /* Rachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32EE57F1CBE297400FDAB79 /* Rachability.swift */; };
 		C36012C91CAAAAC400FEE4CB /* FeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36012C81CAAAAC400FEE4CB /* FeedParser.swift */; };
 		C383BB911CB95C75008A1D9D /* ToDo.txt in Resources */ = {isa = PBXBuildFile; fileRef = C383BB901CB95C75008A1D9D /* ToDo.txt */; };
@@ -46,7 +45,6 @@
 		C327FBC01CC3CC1500260FFA /* ExpandedEpisodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedEpisodeCell.swift; sourceTree = "<group>"; };
 		C327FBC11CC3CC1500260FFA /* ExpandedEpisodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandedEpisodeCell.xib; sourceTree = "<group>"; };
 		C327FBC41CC4C08200260FFA /* SingletonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingletonModel.swift; sourceTree = "<group>"; };
-		C32DEDB11CC0381400CC7863 /* FoldingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldingCell.swift; sourceTree = "<group>"; };
 		C32EE57F1CBE297400FDAB79 /* Rachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rachability.swift; sourceTree = "<group>"; };
 		C36012C81CAAAAC400FEE4CB /* FeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedParser.swift; path = ../FeedParser.swift; sourceTree = "<group>"; };
 		C383BB901CB95C75008A1D9D /* ToDo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ToDo.txt; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				F46F13CE1A8E0A6E00EEB477 /* AppDelegate.swift */,
-				C32DEDB11CC0381400CC7863 /* FoldingCell.swift */,
 				C327FBC01CC3CC1500260FFA /* ExpandedEpisodeCell.swift */,
 				C327FBC11CC3CC1500260FFA /* ExpandedEpisodeCell.xib */,
 				C3A2B5501CBECEC3003838DF /* EpisodeContentCell.swift */,
@@ -221,9 +218,11 @@
 				TargetAttributes = {
 					F46F13C81A8E0A6E00EEB477 = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0810;
 					};
 					F46F13DD1A8E0A6F00EEB477 = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = F46F13C81A8E0A6E00EEB477;
 					};
 				};
@@ -276,7 +275,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C383BB931CB96260008A1D9D /* README.md in Sources */,
-				C32DEDB21CC0381400CC7863 /* FoldingCell.swift in Sources */,
 				C3D47C541CBAB47700E0376A /* Episode.swift in Sources */,
 				C327FBC51CC4C08200260FFA /* SingletonModel.swift in Sources */,
 				C32EE5801CBE297400FDAB79 /* Rachability.swift in Sources */,
@@ -418,6 +416,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.octoberhammer.ESLPod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -429,6 +428,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.octoberhammer.ESLPod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -448,6 +448,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appcoda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimpleRSSReader.app/SimpleRSSReader";
 			};
 			name = Debug;
@@ -464,6 +465,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appcoda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimpleRSSReader.app/SimpleRSSReader";
 			};
 			name = Release;

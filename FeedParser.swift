@@ -8,77 +8,77 @@
 
 import UIKit
 
-class FeedParser: NSObject, NSXMLParserDelegate {
-	private var rssItems:[(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String, origLink: String)] = []
+class FeedParser: NSObject, XMLParserDelegate {
+	fileprivate var rssItems:[(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String, origLink: String)] = []
 
 	
-	let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+	let appDelegate = UIApplication.shared.delegate as! AppDelegate
 	let singletonModel = SingletonModel.sharedInstance
 
 	
-	private var currentElement: String = ""
-	private var currentTitle: String = "" {
+	fileprivate var currentElement: String = ""
+	fileprivate var currentTitle: String = "" {
 		didSet {
-			currentTitle = currentTitle.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+			currentTitle = currentTitle.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 		}
 	}
 	
-	private var currentItunesAuthor: String = "" {
+	fileprivate var currentItunesAuthor: String = "" {
 		didSet {
-			currentItunesAuthor = currentItunesAuthor.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+			currentItunesAuthor = currentItunesAuthor.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 		}
 	}
 	
-	private var currentItunesSubtitle: String = "" {
+	fileprivate var currentItunesSubtitle: String = "" {
 		didSet {
-			currentItunesSubtitle = currentItunesSubtitle.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+			currentItunesSubtitle = currentItunesSubtitle.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 		}
 	}
 	
-	private var currentDescription:String = "" {
+	fileprivate var currentDescription:String = "" {
 		didSet {
-			currentDescription = currentDescription.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+			currentDescription = currentDescription.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 		}
 	}
 
-	private var currentPubDate:String = "" {
+	fileprivate var currentPubDate:String = "" {
 		didSet {
-			currentPubDate = currentPubDate.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+			currentPubDate = currentPubDate.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 		}
 	}
 
-	private var currentLink:String = "" {
+	fileprivate var currentLink:String = "" {
 		didSet {
-			currentLink = currentLink.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+			currentLink = currentLink.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 		}
 	}
 	
-	private var currentOrigLink:String = "" {
+	fileprivate var currentOrigLink:String = "" {
 		didSet {
-			currentOrigLink = currentOrigLink.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+			currentOrigLink = currentOrigLink.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 		}
 	}
 	
-	private var currentGuid:String = "" {
+	fileprivate var currentGuid:String = "" {
 		didSet {
-			currentGuid = currentGuid.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+			currentGuid = currentGuid.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 		}
 	}
 	
-	private var currentDuration:String = "" {
+	fileprivate var currentDuration:String = "" {
 		didSet {
-			currentDuration = currentDuration.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+			currentDuration = currentDuration.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 		}
 	}
 	
-	private var parserCompletionHandler: ([(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String, origLink: String)] -> Void)?
+	fileprivate var parserCompletionHandler: (([(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String, origLink: String)]) -> Void)?
 	
-	func parseFeed(feedUrl: String, completionHandler: ([(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String, origLink: String)] -> Void)?) -> Void {
+	func parseFeed(_ feedUrl: String, completionHandler: (([(title: String, link: String, description: String, pubDate: String, guid: String, duration: String, itunesAuthor: String, itunesSubtitle: String, origLink: String)]) -> Void)?) -> Void {
 		self.parserCompletionHandler = completionHandler
 		
-		let request = NSURLRequest(URL: NSURL(string:feedUrl)!)
-		let urlSession = NSURLSession.sharedSession()
-		let task = urlSession.dataTaskWithRequest(request, completionHandler: {
+		let request = URLRequest(url: URL(string:feedUrl)!)
+		let urlSession = URLSession.shared
+		let task = urlSession.dataTask(with: request, completionHandler: {
 			(data, response, error) -> Void in
 			
 			guard let data = data else {
@@ -88,7 +88,7 @@ class FeedParser: NSObject, NSXMLParserDelegate {
 				return
 			}
 			
-			let parser = NSXMLParser(data:data)
+			let parser = XMLParser(data:data)
 			parser.delegate = self
 			parser.parse()
 		})
@@ -98,14 +98,14 @@ class FeedParser: NSObject, NSXMLParserDelegate {
 	}
 	
 	
-	func parserDidStartDocument(parser: NSXMLParser) {
+	func parserDidStartDocument(_ parser: XMLParser) {
 		rssItems = []
 		appDelegate.rssItems = []
 	}
 	
 	
 	
-	func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
 		currentElement = elementName
 		
 		if currentElement == "item" {
@@ -122,7 +122,7 @@ class FeedParser: NSObject, NSXMLParserDelegate {
 	}
 	
 
-	func parser(parser: NSXMLParser, foundCharacters string: String) {
+	func parser(_ parser: XMLParser, foundCharacters string: String) {
 		switch currentElement {
 		case "title": currentTitle += string
 		case "description": currentDescription += string
@@ -137,7 +137,7 @@ class FeedParser: NSObject, NSXMLParserDelegate {
 		}
 	}
 	
-	func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+	func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
 		if elementName == "item" {
 //			let rssItem = (title: currentTitle, link: currentLink, description: currentDescription, pubDate: currentPubDate, guid: currentGuid, duration: currentDuration, itunesAuthor: currentItunesAuthor, itunesSubtitle: currentItunesSubtitle, origLink: currentOrigLink)
 			let rssItem = Episode(title: currentTitle, link: currentLink, description: currentDescription, pubDate: currentPubDate, guid: currentGuid, duration: currentDuration, itunesAuthor: currentItunesAuthor, itunesSubtitle: currentItunesSubtitle, origLink: currentOrigLink)
@@ -147,12 +147,12 @@ class FeedParser: NSObject, NSXMLParserDelegate {
 		}
 	}
 	
-	func parserDidEndDocument(parser: NSXMLParser) {
+	func parserDidEndDocument(_ parser: XMLParser) {
 		parserCompletionHandler?(rssItems)
 	}
 	
 	
-	func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
+	func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
 		print(parseError.localizedDescription)
 	}
 	

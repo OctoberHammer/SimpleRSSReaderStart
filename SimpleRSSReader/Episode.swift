@@ -13,10 +13,11 @@ extension String {
 	
 	var html2AttributedString: NSAttributedString? {
 		guard
-			let data = dataUsingEncoding(NSUTF8StringEncoding)
+			let data = data(using: String.Encoding.utf8)
 			else { return nil }
 		do {
-			return try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil)
+            let result = try NSAttributedString(data: data, options:[NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil)
+            return result
 		} catch let error as NSError {
 			print(error.localizedDescription)
 			return  nil
@@ -38,7 +39,7 @@ class Episode {
 	var duration: String?
 	var itunesAuthor: String?
 	var itunesSubtitle: String?
-	var image: NSData?
+	var image: Data?
 	var reachtextContent: NSAttributedString?
 	var isSelected = false
 	var origLink: String?

@@ -21,7 +21,7 @@ class SingletonModel {
 		counter += 1
 	}
 	
-	private init(){
+	fileprivate init(){
 	
 	}
 }

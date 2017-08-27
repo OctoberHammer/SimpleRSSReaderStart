@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class OneEpisodeViewController: UITableViewController, NSURLSessionDownloadDelegate {
+class OneEpisodeViewController: UITableViewController, URLSessionDownloadDelegate {
 
 	@IBOutlet weak var episodeTitle: UILabel!
 	@IBOutlet weak var controllCell: ControllCell!
@@ -23,12 +23,12 @@ class OneEpisodeViewController: UITableViewController, NSURLSessionDownloadDeleg
 	@IBOutlet weak var episodeContent: UILabel!
 	var activeDownload: (String, Download)?
 	
-	var downloadTask: NSURLSessionDownloadTask!
-	var backgroundSession: NSURLSession!
+	var downloadTask: URLSessionDownloadTask!
+	var backgroundSession: Foundation.URLSession!
 	
-	lazy var downloadSession: NSURLSession =  {
-		let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-		let session = NSURLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+	lazy var downloadSession: Foundation.URLSession =  {
+		let configuration = URLSessionConfiguration.default
+		let session = Foundation.URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
 		return session
 	} ()
 	
@@ -38,16 +38,16 @@ class OneEpisodeViewController: UITableViewController, NSURLSessionDownloadDeleg
 //	}
 //	
 	// 1
-	func URLSession(session: NSURLSession,
-	                downloadTask: NSURLSessionDownloadTask,
-	                didFinishDownloadingToURL location: NSURL){
+	func urlSession(_ session: URLSession,
+	                downloadTask: URLSessionDownloadTask,
+	                didFinishDownloadingTo location: URL){
 		
-		let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+		let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
 		let documentDirectoryPath:String = path[0]
-		let fileManager = NSFileManager()
-		let destinationURLForFile = NSURL(fileURLWithPath: documentDirectoryPath.stringByAppendingString("/file.html"))
-		print ("\(destinationURLForFile.path!)")
-		if fileManager.fileExistsAtPath(destinationURLForFile.path!){
+		let fileManager = FileManager()
+		let destinationURLForFile = URL(fileURLWithPath: documentDirectoryPath + "/file.html")
+		print ("\(destinationURLForFile.path)")
+		if fileManager.fileExists(atPath: destinationURLForFile.path){
 			//showFileWithPath(destinationURLForFile.path!)
 		}
 		else{
@@ -62,8 +62,8 @@ class OneEpisodeViewController: UITableViewController, NSURLSessionDownloadDeleg
 	}
 	
 	// 2
-	func URLSession(session: NSURLSession,
-	                downloadTask: NSURLSessionDownloadTask,
+	func urlSession(_ session: URLSession,
+	                downloadTask: URLSessionDownloadTask,
 	                didWriteData bytesWritten: Int64,
 	                             totalBytesWritten: Int64,
 	                             totalBytesExpectedToWrite: Int64){
@@ -71,13 +71,13 @@ class OneEpisodeViewController: UITableViewController, NSURLSessionDownloadDeleg
 	}
 	
 	
-	func URLSession(session: NSURLSession,
-	                task: NSURLSessionTask,
-	                didCompleteWithError error: NSError?){
+	func urlSession(_ session: URLSession,
+	                task: URLSessionTask,
+	                didCompleteWithError error: Error?){
 		downloadTask = nil
 		//progressView.setProgress(0.0, animated: true)
 		if (error != nil) {
-			print(error?.description)
+			print(error?.localizedDescription)
 		}else{
 			print("The task finished transferring data successfully")
 		}
@@ -97,11 +97,11 @@ class OneEpisodeViewController: UITableViewController, NSURLSessionDownloadDeleg
 //		} catch {
 //				print(error)
 //		}
-		let backgroundSessionConfiguration =  NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier("backgroundSession")
-		backgroundSession = NSURLSession(configuration: backgroundSessionConfiguration, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
-		let url = NSURL(string: (currentEpisode?.link)!)!
+		let backgroundSessionConfiguration =  URLSessionConfiguration.background(withIdentifier: "backgroundSession")
+		backgroundSession = Foundation.URLSession(configuration: backgroundSessionConfiguration, delegate: self, delegateQueue: OperationQueue.main)
+		let url = URL(string: (currentEpisode?.link)!)!
 		print("\(url)")
-		downloadTask = backgroundSession.downloadTaskWithURL(url)
+		downloadTask = backgroundSession.downloadTask(with: url)
 		downloadTask.resume()
 		// Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -116,12 +116,12 @@ class OneEpisodeViewController: UITableViewController, NSURLSessionDownloadDeleg
 	}
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 3
     }
